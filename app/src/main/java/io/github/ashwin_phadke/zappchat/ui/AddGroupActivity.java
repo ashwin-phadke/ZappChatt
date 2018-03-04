@@ -141,9 +141,7 @@ public class AddGroupActivity extends AppCompatActivity {
         //Delete group
         final String idGroup = groupEdit.id;
         Room room = new Room();
-        for (String id : listIDChoose) {
-            room.member.add(id);
-        }
+        room.member.addAll(listIDChoose);
         room.groupInfo.put("name", editTextGroupName.getText().toString());
         room.groupInfo.put("admin", StaticConfig.UID);
         FirebaseDatabase.getInstance().getReference().child("group/" + idGroup).setValue(room)
@@ -190,9 +188,7 @@ public class AddGroupActivity extends AppCompatActivity {
 
         final String idGroup = (StaticConfig.UID + System.currentTimeMillis()).hashCode() + "";
         Room room = new Room();
-        for (String id : listIDChoose) {
-            room.member.add(id);
-        }
+        room.member.addAll(listIDChoose);
         room.groupInfo.put("name", editTextGroupName.getText().toString());
         room.groupInfo.put("admin", StaticConfig.UID);
         FirebaseDatabase.getInstance().getReference().child("group/" + idGroup).setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
