@@ -107,9 +107,9 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
         View layout = inflater.inflate(R.layout.fragment_people, container, false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerListFrends = (RecyclerView) layout.findViewById(R.id.recycleListFriend);
+        recyclerListFrends = layout.findViewById(R.id.recycleListFriend);
         recyclerListFrends.setLayoutManager(linearLayoutManager);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) layout.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout = layout.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         adapter = new ListFriendsAdapter(getContext(), dataListFriend, this);
         recyclerListFrends.setAdapter(adapter);
@@ -726,10 +726,10 @@ class ItemFriendViewHolder extends RecyclerView.ViewHolder{
 
     ItemFriendViewHolder(Context context, View itemView) {
         super(itemView);
-        avata = (CircleImageView) itemView.findViewById(R.id.icon_avata);
-        txtName = (TextView) itemView.findViewById(R.id.txtName);
-        txtTime = (TextView) itemView.findViewById(R.id.txtTime);
-        txtMessage = (TextView) itemView.findViewById(R.id.txtMessage);
+        avata = itemView.findViewById(R.id.icon_avata);
+        txtName = itemView.findViewById(R.id.txtName);
+        txtTime = itemView.findViewById(R.id.txtTime);
+        txtMessage = itemView.findViewById(R.id.txtMessage);
         this.context = context;
     }
 }

@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "io.github.ashwin_phadke.zappchat"
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion 17
+        targetSdkVersion 27
+        multiDexEnabled true
+
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +16,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    dexOptions {
+        preDexLibraries = false
     }
 }
 
@@ -34,9 +38,20 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.yarolegovich:lovely-dialog:1.1.0'
     compile 'com.android.support:animated-vector-drawable:27.0.2'
+    compile 'com.google.firebase:firebase-messaging:11.8.0'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.android.support:multidex:1.0.2'
 }
-
-
-
-
 apply plugin: 'com.google.gms.google-services'
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = ['--multi-dex']
+        } else {
+            dx.additionalParameters += '--multi-dex'
+        }
+    }
+}

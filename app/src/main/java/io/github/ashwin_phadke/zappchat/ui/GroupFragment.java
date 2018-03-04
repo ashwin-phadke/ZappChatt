@@ -73,8 +73,8 @@ public class GroupFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         View layout = inflater.inflate(R.layout.fragment_group, container, false);
 
         listGroup = GroupDB.getInstance(getContext()).getListGroups();
-        recyclerListGroups = (RecyclerView) layout.findViewById(R.id.recycleListGroup);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) layout.findViewById(R.id.swipeRefreshLayout);
+        recyclerListGroups = layout.findViewById(R.id.recycleListGroup);
+        mSwipeRefreshLayout = layout.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerListGroups.setLayoutManager(layoutManager);
@@ -185,7 +185,7 @@ public class GroupFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         switch (item.getItemId()) {
             case CONTEXT_MENU_DELETE:
                 int posGroup = item.getIntent().getIntExtra(CONTEXT_MENU_KEY_INTENT_DATA_POS, -1);
-                if(((String)listGroup.get(posGroup).groupInfo.get("admin")).equals(StaticConfig.UID)) {
+                if(listGroup.get(posGroup).groupInfo.get("admin").equals(StaticConfig.UID)) {
                     Group group = listGroup.get(posGroup);
                     listGroup.remove(posGroup);
                     if(group != null){
@@ -197,7 +197,7 @@ public class GroupFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 break;
             case CONTEXT_MENU_EDIT:
                 int posGroup1 = item.getIntent().getIntExtra(CONTEXT_MENU_KEY_INTENT_DATA_POS, -1);
-                if(((String)listGroup.get(posGroup1).groupInfo.get("admin")).equals(StaticConfig.UID)) {
+                if(listGroup.get(posGroup1).groupInfo.get("admin").equals(StaticConfig.UID)) {
                     Intent intent = new Intent(getContext(), AddGroupActivity.class);
                     intent.putExtra("groupId", listGroup.get(posGroup1).id);
                     startActivityForResult(intent, REQUEST_EDIT_GROUP);
@@ -209,7 +209,7 @@ public class GroupFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
             case CONTEXT_MENU_LEAVE:
                 int position = item.getIntent().getIntExtra(CONTEXT_MENU_KEY_INTENT_DATA_POS, -1);
-                if(((String)listGroup.get(position).groupInfo.get("admin")).equals(StaticConfig.UID)) {
+                if(listGroup.get(position).groupInfo.get("admin").equals(StaticConfig.UID)) {
                     Toast.makeText(getActivity(), "Admin cannot leave group", Toast.LENGTH_LONG).show();
                 }else{
                     waitingLeavingGroup.show();
@@ -434,9 +434,9 @@ class ItemGroupViewHolder extends RecyclerView.ViewHolder implements View.OnCrea
     public ItemGroupViewHolder(View itemView) {
         super(itemView);
         itemView.setOnCreateContextMenuListener(this);
-        iconGroup = (TextView) itemView.findViewById(R.id.icon_group);
-        txtGroupName = (TextView) itemView.findViewById(R.id.txtName);
-        btnMore = (ImageButton) itemView.findViewById(R.id.btnMoreAction);
+        iconGroup = itemView.findViewById(R.id.icon_group);
+        txtGroupName = itemView.findViewById(R.id.txtName);
+        btnMore = itemView.findViewById(R.id.btnMoreAction);
     }
 
     @Override

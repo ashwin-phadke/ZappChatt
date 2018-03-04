@@ -120,9 +120,9 @@ public class UserProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         context = view.getContext();
-        avatar = (ImageView) view.findViewById(R.id.img_avatar);
+        avatar = view.findViewById(R.id.img_avatar);
         avatar.setOnClickListener(onAvatarClick);
-        tvUserName = (TextView)view.findViewById(R.id.tv_username);
+        tvUserName = view.findViewById(R.id.tv_username);
 
         SharedPreferenceHelper prefHelper = SharedPreferenceHelper.getInstance(context);
         myAccount = prefHelper.getUserInfo();
@@ -130,7 +130,7 @@ public class UserProfileFragment extends Fragment {
         setImageAvatar(context, myAccount.avata);
         tvUserName.setText(myAccount.name);
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.info_recycler_view);
+        recyclerView = view.findViewById(R.id.info_recycler_view);
         infoAdapter = new UserInfoAdapter(listConfig);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -313,7 +313,7 @@ public class UserProfileFragment extends Fragment {
                     if(config.getLabel().equals(USERNAME_LABEL)){
                         View vewInflater = LayoutInflater.from(context)
                                 .inflate(R.layout.dialog_edit_username,  (ViewGroup) getView(), false);
-                        final EditText input = (EditText)vewInflater.findViewById(R.id.edit_username);
+                        final EditText input = vewInflater.findViewById(R.id.edit_username);
                         input.setText(myAccount.name);
                         /*Hiển thị dialog với dEitText cho phép người dùng nhập username mới*/
                         new AlertDialog.Builder(context)
@@ -435,9 +435,9 @@ public class UserProfileFragment extends Fragment {
             public ImageView icon;
             public ViewHolder(View view) {
                 super(view);
-                label = (TextView)view.findViewById(R.id.tv_title);
-                value = (TextView)view.findViewById(R.id.tv_detail);
-                icon = (ImageView)view.findViewById(R.id.img_icon);
+                label = view.findViewById(R.id.tv_title);
+                value = view.findViewById(R.id.tv_detail);
+                icon = view.findViewById(R.id.img_icon);
             }
         }
 

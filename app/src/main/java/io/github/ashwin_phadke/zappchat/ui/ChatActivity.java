@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         String nameFriend = intentData.getStringExtra(StaticConfig.INTENT_KEY_CHAT_FRIEND);
 
         consersation = new Consersation();
-        btnSend = (ImageButton) findViewById(R.id.btnSend);
+        btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(this);
 
         String base64AvataUser = SharedPreferenceHelper.getInstance(this).getUserInfo().avata;
@@ -71,11 +71,11 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             bitmapAvataUser = null;
         }
 
-        editWriteMessage = (EditText) findViewById(R.id.editWriteMessage);
+        editWriteMessage = findViewById(R.id.editWriteMessage);
         if (idFriend != null && nameFriend != null) {
             getSupportActionBar().setTitle(nameFriend);
             linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-            recyclerChat = (RecyclerView) findViewById(R.id.recyclerChat);
+            recyclerChat = findViewById(R.id.recyclerChat);
             recyclerChat.setLayoutManager(linearLayoutManager);
             adapter = new ListMessageAdapter(this, consersation, bitmapAvataFriend, bitmapAvataUser);
             FirebaseDatabase.getInstance().getReference().child("message/" + roomId).addChildEventListener(new ChildEventListener() {
@@ -240,8 +240,8 @@ class ItemMessageUserHolder extends RecyclerView.ViewHolder {
 
     public ItemMessageUserHolder(View itemView) {
         super(itemView);
-        txtContent = (TextView) itemView.findViewById(R.id.textContentUser);
-        avata = (CircleImageView) itemView.findViewById(R.id.imageView2);
+        txtContent = itemView.findViewById(R.id.textContentUser);
+        avata = itemView.findViewById(R.id.imageView2);
     }
 }
 
@@ -251,7 +251,7 @@ class ItemMessageFriendHolder extends RecyclerView.ViewHolder {
 
     public ItemMessageFriendHolder(View itemView) {
         super(itemView);
-        txtContent = (TextView) itemView.findViewById(R.id.textContentFriend);
-        avata = (CircleImageView) itemView.findViewById(R.id.imageView3);
+        txtContent = itemView.findViewById(R.id.textContentFriend);
+        avata = itemView.findViewById(R.id.imageView3);
     }
 }

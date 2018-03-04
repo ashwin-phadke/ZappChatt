@@ -1,10 +1,12 @@
 package io.github.ashwin_phadke.zappchat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -29,7 +31,8 @@ import io.github.ashwin_phadke.zappchat.ui.UserProfileFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
+
     private static String TAG = "MainActivity";
     private ViewPager viewPager;
     private TabLayout tabLayout = null;
@@ -43,20 +46,25 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
-
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         if(toolbar != null) {
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle("RivChat");
+            if(getSupportActionBar()!=null) {
+                setTitle("ZappChat");
+            }
         }
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        floatButton = (FloatingActionButton) findViewById(R.id.fab);
+        viewPager = findViewById(R.id.viewpager);
+        floatButton = findViewById(R.id.fab);
         initTab();
         initFirebase();
     }
@@ -107,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
      * Khoi tao 3 tab
      */
     private void initTab() {
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorIndivateTab));
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -195,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
-            Toast.makeText(this, "Rivchat version 1.0", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ZappChat version 1.0", Toast.LENGTH_LONG).show();
             return true;
         }
 
